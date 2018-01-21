@@ -37,6 +37,10 @@ class ArticleController extends Controller
 
 
 
+
+
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -103,7 +107,7 @@ class ArticleController extends Controller
         $article->update($request->except('_token', '_method'));
 
         return redirect()->route('article.show', [$article->id]);
-        
+
 
     }
 

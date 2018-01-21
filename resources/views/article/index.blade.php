@@ -23,9 +23,8 @@
                             <div class="row">
                                 @if(isset($article))
                                     @foreach($article as $art)
-                                        <h2>{{ $art->title }}</h2>
-                                        <p>{{ $art->description }}</p>
-                                        <p>Ecrit par {{$art->user_id}}</p>
+                                        <a href="">{{ $art->title }}</a>
+                                        <p>Ecrit par {{$art->user_id}} le {{$art->created_at}}</p>
                                     @endforeach
 
                                 @endif
