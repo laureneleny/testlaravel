@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use App\Http\Requests\ArticleRequest;
+use App\Like;
+use App\Post;
 use Illuminate\Support\Facades\Auth;
-
-
-
+use Illuminate\Support\Facades\Input;
 
 
 class ArticleController extends Controller
@@ -34,6 +34,8 @@ class ArticleController extends Controller
 
         return view('article.index', compact('article'));
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -101,6 +103,7 @@ class ArticleController extends Controller
         $article->update($request->except('_token', '_method'));
 
         return redirect()->route('article.show', [$article->id]);
+        
 
     }
 
@@ -116,4 +119,9 @@ class ArticleController extends Controller
 
         return redirect()->back();
     }
+
+
+
+
+
 }

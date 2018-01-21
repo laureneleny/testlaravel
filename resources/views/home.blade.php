@@ -1,23 +1,54 @@
+
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 panel panel-default">
+                <a href="{{ route ('article.create') }}" style="color: black; font-size: 24px;">Ajouter un article</a>
+                <div class="panel-heading">Mes articles</div>
 
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Titre de l'article</th>
+                        <th>Auteur de l'article</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($article as $articl)
+                        <tr>
+                            <th>{{ $articl->title }}</th>
+                            <th>{{$articl->user_id }}</th>
 
-                    You are logged in!
-                </div>
+
+                            <td>
+                                <a href="{{ route('article.show', [$articl->id]) }}">
+                                    Voir
+                                </a>
+
+
+                                <a href="{{ route('article.edit', [$articl->id]) }}">
+                                    Edit
+                                </a>
+
+                                <a href="#" onclick="event.preventDefault();
+                                        document.getElementById('form-{!! $articl->id !!}').submit();">
+                                    Supprimer
+                                </a>
+
+                                <form id="form-{{$articl->id}}" method="POST"
+                                      action="{{ route('article.destroy', [$articl->id]) }}">
+                                    {{csrf_field()}}
+                                    {{method_field('DELETE')}}
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-</div>
 @endsection

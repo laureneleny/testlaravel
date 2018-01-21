@@ -3,47 +3,38 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 panel panel-default">
-                <a href="{{ route ('article.create') }}" style="color: black; font-size: 24px;">Ajouter une tâche</a>
-                <div class="panel-heading">Mes articles</div>
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
 
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>Titre de l'article</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($article as $articl)
-                        <tr>
-                            <th>{{ $articl->title }}</th>
+                    <a href="{{ route ('article.create') }}" style="color: black; font-size: 18px; ;">Ajouter un article</a>
 
-                            <td>
-                                <a href="{{ route('article.show', [$articl->id]) }}">
-                                    Voir
-                                </a>
+                    <div class="panel-body">
+                        @if (session('status'))
+                            <div class="alert alert-success">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+
+                        Vous êtes connecté !
+
+                        <h1>Articles</h1>
+
+                        <div class="container" style="">
+                            <div class="row">
+                                @if(isset($article))
+                                    @foreach($article as $art)
+                                        <h2>{{ $art->title }}</h2>
+                                        <p>{{ $art->description }}</p>
+                                        <p>Ecrit par {{$art->user_id}}</p>
+                                    @endforeach
+
+                                @endif
+                            </div>
+                        </div>
 
 
-                                <a href="{{ route('article.edit', [$articl->id]) }}">
-                                    Edit
-                                </a>
-
-                                <a href="#" onclick="event.preventDefault();
-                                        document.getElementById('form-{!! $articl->id !!}').submit();">
-                                    Supprimer
-                                </a>
-
-                                <form id="form-{{$articl->id}}" method="POST"
-                                      action="{{ route('article.destroy', [$articl->id]) }}">
-                                    {{csrf_field()}}
-                                    {{method_field('DELETE')}}
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

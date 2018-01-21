@@ -15,6 +15,7 @@ class CreateArticlesTable extends Migration
     {
         Schema::create('article', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('user_id', '50');
             $table->string('title', 255);
             $table->longText('description');
             $table->boolean('is_done')->default(false);

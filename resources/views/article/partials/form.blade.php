@@ -4,7 +4,12 @@
 
     {{ method_field( $item->exists ? 'PUT' : 'POST') }}
 <div class="form-group">
-        <input class="form-control"  value="{{old('title', $item->title)}}" type="text" name="title" placeholder="Titre">
+
+    <input class="form-control"  value="{{old('title', $item->title)}}" type="text" name="title" placeholder="Titre">
+
+</div>
+    <div class="form-group">
+    <input class="form-control"  value="{{old('title', $item->user_id)}}" type="text" name="user_id" placeholder="Votre nom">
     </div>
 
     <div class="form-group">
@@ -22,6 +27,9 @@
             <option value="1">Oui</option>
         </select>
     </div>
+
+
+
 
     <button class="btn btn-primary btn-block">Envoyer</button>
 
